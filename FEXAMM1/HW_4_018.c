@@ -1,41 +1,26 @@
 #include <stdio.h>
 
 int main() {
-    int size;
-    printf("Input the size of array: ");
-    scanf("%d", &size);//รับค่าตัวแปรมาเก็บในตัวแปรsize
-    int array[size];//สร้างตัวแปรarrayให้มีขนาดเท่ากับsizeที่รับเข้ามา
-    printf("Input %d elements in the array:\n", size);
+    int sum = 0;
+    int array[3][3];//ประกาศตัวแปรarrayสองมิติ
 
-    for (int i = 0; i < size; i++) {//วนลูปเพื่อที่จะรับค่าเข้ามาเก็บในตัวแปรarray
-        printf("element - %d: ", i + 1);
-        scanf("%d", &array[i]); 
-    }
-
-    int min = array[0], second_min = array[0];//ประกาศตัวแปรน้อยสุดกับน้อยอันดับสองให้เป็น0
-
-    for (int i = 1; i < size; i++) {//วนลูปหาจำนวนน้อยสุด
-        if (array[i] < min) {
-            second_min = min;
-            min = array[i];
-        } else if (array[i] < second_min && array[i] != min) {
-            second_min = array[i];
+    printf("Enter 9 elements for the 3x3 array:\n");
+    for (int i = 0; i < 3; i++) {//loopรับค่าarrayสองมิติ
+        for (int j = 0; j < 3; j++) {
+            scanf("%d", &array[i][j]);
         }
     }
 
-    if (second_min == min) { //ถ้าหากรองน้อยสุดเท่ากับน้อยสุดกำหนดค่าให้รองน้อยสุดมีค่าเป็น1
-        second_min = array[1];
-        for (int i = 0; i < size; i++) {
-            if (array[i] != min) {
-                second_min = array[i];
-                break;
-            }
+    printf("The 3x3 array is:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {//แสดงค่าอาเรย์2มิติ
+            printf("%d ", array[i][j]);
         }
-        for (int i = 0; i < size; i++) {//วนลูปหาค่ารองน้อยสุด
-            if (array[i] < second_min && array[i] != min) {
-                second_min = array[i];
-            }
-        }
+        printf("\n");
     }
-        printf("The second minimum value in the array is: %d\n", second_min);
+    for (int i = 0; i < 3; i++) {//นำค่าแบบprimary digonalมารวมกัน
+        sum += array[i][i];
+    }
+
+    printf("The sum of the primary diagonal elements is: %d\n", sum);
 }
